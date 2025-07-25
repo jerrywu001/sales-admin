@@ -1,0 +1,20 @@
+# interface规范
+
+1. 接口使用大写 I 前缀
+2. 避免使用 vO/DTO 等后缀
+3. 使用清晰的命名如 Request/Response/Detail 等
+4. 为每个接口和字段添加完整的 JSDoc 文档注释
+5. 不要出现IPageResult<T>和ICommonResult<T>
+6. 保持命名简洁但具有描述性
+7. 响应部分只提供context即可
+8. 注释中不要出现@extends，@implements @example
+9. 结合interface，生成json数据(严格的json格式)
+10. 请求参数定义extends IPageParam
+11. 结合项目上下文和interface生成queryXXX函数
+12. interface请统一加上export
+13. 不要出现 // API实现
+
+# json数据规范
+
+1. 只生成响应示例，不需要注释
+2. 仅仅包含context部分即可

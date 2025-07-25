@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "vue.volar",
+    "antfu.iconify",
+    "oxc.oxc-vscode",
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss",
+    "stylelint.vscode-stylelint",
+  ]
+}

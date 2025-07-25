@@ -1,0 +1,37 @@
+diff --git a/dist/cjs/checkers/vueTsc/prepareVueTsc.js b/dist/cjs/checkers/vueTsc/prepareVueTsc.js
+index 7ba31c941a63b470c100a506b9beefecb47c5603..ca490d82d07a9338032bc1257a263c23aeb67a44 100644
+--- a/dist/cjs/checkers/vueTsc/prepareVueTsc.js
++++ b/dist/cjs/checkers/vueTsc/prepareVueTsc.js
+@@ -27,7 +27,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
+ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+ var prepareVueTsc_exports = {};
+ __export(prepareVueTsc_exports, {
+-  prepareVueTsc: () => prepareVueTsc
++  prepareVueTsc: () => prepareVueTsc,
+ });
+ module.exports = __toCommonJS(prepareVueTsc_exports);
+ var getImportMetaUrl = () => typeof document === "undefined" ? new URL("file:" + __filename).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
+@@ -83,8 +83,11 @@ async function prepareVueTsc() {
+       _require.resolve(import_node_path.default.resolve(targetTsDir, "lib/typescript.js"))
+     );
+   }
++  const esmTargetTsDir = import_node_path.default.resolve(_dirname, "../../../esm/checkers/vueTsc/typescript-vue-tsc");
++  await (0, import_promises.cp)(targetTsDir, esmTargetTsDir, { recursive: true });
+   return { targetTsDir };
+ }
++
+ async function overrideTscJs(tscJsPath) {
+   const languagePluginsFile = import_node_path.default.resolve(_dirname, "languagePlugins.cjs");
+   let tsc = await (0, import_promises.readFile)(tscJsPath, "utf8");
+diff --git a/dist/esm/checkers/vueTsc/prepareVueTsc.js b/dist/esm/checkers/vueTsc/prepareVueTsc.js
+index 1cb3b2e197c5f31e27b8ed9e265ed672d7545af4..aa7e3966a21e15ac0f5e39ea4623aaf5c117afd7 100644
+--- a/dist/esm/checkers/vueTsc/prepareVueTsc.js
++++ b/dist/esm/checkers/vueTsc/prepareVueTsc.js
+@@ -17,6 +17,7 @@ const proxyApiPath = _require.resolve(
+ const extraSupportedExtensions = [".vue"];
+ async function prepareVueTsc() {
+   const targetTsDir = path.resolve(_dirname, "typescript-vue-tsc");
++  return { targetTsDir };
+   const vueTscFlagFile = path.resolve(targetTsDir, "vue-tsc-resolve-path");
+   const currTsVersion = _require("typescript/package.json").version;
+   const tsMajorVersion = Number(currTsVersion.split(".")[0]);

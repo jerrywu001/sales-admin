@@ -1,0 +1,14 @@
+/* stylelint-disable no-invalid-position-at-import-rule */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('@app/assets/styles/common.scss');
+@import url('transition.scss');
+
+/** arco-btns */
+.arco-btn {
+  .svg-icon {
+    @apply w-[18px] h-[18px] mr-1;
+  }
+}

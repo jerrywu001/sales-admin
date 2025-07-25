@@ -1,0 +1,166 @@
+[
+  {
+    "name": "haha",
+    "id": 1234567809,
+    "lianId": 1234567089,
+    "channelType": 1,
+    "payeeNo": "6058903245334632",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-09 10:22:20",
+    "openAccountWillUrl": "https://www.baidu.com",
+    "accountStatus": "ACTIVATE_PENDING_NEW"
+  },
+  {
+    "name": "赵云",
+    "id": 123456789,
+    "lianId": 123456789,
+    "channelType": 1,
+    "payeeNo": "658903245334632",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-09 10:22:20"
+  },
+  {
+    "name": "李四",
+    "channelType": 1,
+    "id": 123456789,
+    "lianId": 123456786,
+    "payeeNo": "85890324533469",
+    "payeeType": 2,
+    "status": "ENABLED",
+    "createTime": "2024-09-06 10:22:20"
+  },
+  {
+    "name": "王五",
+    "channelType": 1,
+    "id": 123456789,
+    "lianId": 123456782,
+    "payeeNo": "75890324533463",
+    "payeeType": 1,
+    "status": "DISABLED",
+    "createTime": "2024-09-05 10:22:20"
+  },
+  {
+    "name": "张飞",
+    "channelType": 1,
+    "id": 123456789,
+    "lianId": 1234560,
+    "payeeNo": "324533499",
+    "payeeType": 2,
+    "status": "PENDING",
+    "createTime": "2024-09-02 10:22:20"
+  },
+  {
+    "name": "张飞",
+    "channelType": 1,
+    "id": 123456789,
+    "lianId": 1234561,
+    "payeeNo": "324533463",
+    "payeeType": 2,
+    "status": "CHECK",
+    "createTime": "2024-09-02 10:22:20"
+  },
+  {
+    "name": "刘备",
+    "channelType": 1,
+    "id": 123456789,
+    "lianId": 1234562,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "FAIL",
+    "createTime": "2024-09-01 10:22:20",
+    "failReason": "用户申请基本信息身份证号无法匹配，请重新确认信息"
+  },
+  {
+    "name": "liubei",
+    "channelType": 1,
+    "id": 123456780,
+    "lianId": 1234560,
+    "payeeNo": "324533453",
+    "payeeType": 1,
+    "status": "CANCELLED",
+    "createTime": "2024-09-01 10:22:20",
+    "failReason": ""
+  },
+  {
+    "name": "易宝开户",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533499",
+    "payeeType": 2,
+    "status": "ENABLED",
+    "createTime": "2024-09-02 10:22:20"
+  },
+  {
+    "name": "易宝开户2",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-01 10:22:20"
+  },
+  {
+    "name": "易宝开户3",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-01 10:22:20"
+  },
+  {
+    "name": "易宝开户4",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-01 10:22:20"
+  },
+  {
+    "name": "易宝开户5",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-01 10:22:20"
+  },
+  {
+    "name": "易宝开户6",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-01 10:22:20"
+  },
+  {
+    "name": "易宝开户7",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-01 10:22:20"
+  },
+  {
+    "name": "易宝开户8",
+    "channelType": 2,
+    "id": 123456789,
+    "yopId": 123456789,
+    "payeeNo": "324533463",
+    "payeeType": 1,
+    "status": "ENABLED",
+    "createTime": "2024-09-01 10:22:20"
+  }
+]

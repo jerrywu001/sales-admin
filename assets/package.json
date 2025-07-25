@@ -1,0 +1,25 @@
+{
+  "name": "@app/assets",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./styles/common.scss",
+    "./*": [
+      "./*"
+    ]
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "files": [
+    "images",
+    "styles"
+  ]
+}

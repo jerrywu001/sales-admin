@@ -1,0 +1,8 @@
+packages:
+- 'assets'
+- 'docs'
+- 'mocks'
+- 'tailwindconfig'
+- 'components/**'
+- 'core/**'
+- 'apps/*'

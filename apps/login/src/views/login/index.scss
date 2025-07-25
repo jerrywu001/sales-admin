@@ -1,0 +1,55 @@
+.login {
+  @apply flex items-center justify-end h-full w-full rounded-none bg-cover bg-no-repeat;
+
+  background-image: url(../../assets/images/login-background.png);
+}
+
+.login-form {
+  @apply bg-white bg-cover bg-no-repeat rounded-sm w-[1200px] h-[640px] my-auto mx-auto shadow-xl flex;
+}
+
+.login-content {
+  @apply box-border w-[600px];
+}
+
+.login-logo {
+  @apply bg-no-repeat bg-cover w-[140px] h-[40px] mx-auto mt-[82px] mb-[40px];
+}
+
+.login-box {
+  @apply flex flex-col w-[458px] mx-auto;
+}
+
+.login-tabs {
+  @apply h-[40px] w-[201px] mx-auto flex select-none;
+
+  .tab-item {
+    @apply relative cursor-pointer flex flex-1 text-[#6b7891] items-center justify-center text-[16px];
+
+    &.active {
+      @apply items-start text-[20px] text-[rgb(var(--primary-6))];
+
+      &::before {
+        content: '';
+
+        @apply absolute w-[24px] h-[4px] rounded-sm bg-[rgb(var(--primary-6))] bottom-0;
+      }
+    }
+
+    &:hover {
+      @apply text-[rgb(var(--primary-6))];
+    }
+  }
+}
+
+.custom-input-wrapper {
+  @apply w-[360px] ml-[41px];
+}
+
+.login-submit {
+  @apply cursor-pointer w-[360px] h-[44px] ml-[41px] text-white flex items-center justify-center text-[16px];
+}
+
+.login-service {
+  @apply flex items-center w-[360px] ml-[115px] mt-[50px] text-[#6b7891] text-[14px];
+}

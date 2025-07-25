@@ -1,0 +1,14 @@
+{
+  "name": "@app/tailwind",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@core/main": "workspace:^",
+    "@vue3/components": "workspace:^"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
