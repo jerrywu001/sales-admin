@@ -36,14 +36,9 @@ server {
     try_files  $uri $uri/ /identity-saas/index.html;
   }
 
-  location /identity-agent {
+  location /identity-rent {
     index  index.html;
-    try_files  $uri $uri/ /identity-agent/index.html;
-  }
-
-  location /identity-company {
-    index  index.html;
-    try_files  $uri $uri/ /identity-company/index.html;
+    try_files  $uri $uri/ /identity-rent/index.html;
   }
 
   location / {

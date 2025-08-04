@@ -52,6 +52,7 @@ export default defineConfig({
       // 自定义变量
       __LOGIN_APP_PORT__: JSON.stringify(process.env.LOGIN_APP_PORT),
       __MAIN_APP_PORT__: JSON.stringify(process.env.MAIN_APP_PORT),
+      __RENT_APP_PORT__: JSON.stringify(process.env.RENT_APP_PORT),
       __VERSION__: JSON.stringify(require(resolve('./package.json')).version),
       __BUILDDATE__: JSON.stringify(new Date().toLocaleString()),
       __ENABLE_DEV_MOCK__: JSON.stringify(process.env.ENABLE_MOCK === 'true'),

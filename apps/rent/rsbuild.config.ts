@@ -22,12 +22,12 @@ const myPlugin: any = () => ({
     api.onAfterBuild(() => {
       const existDist = fs.existsSync(resolve('../../dist'));
 
-      if (existDist) shelljs.rm('-rf', '../../dist/identity-saas');
+      if (existDist) shelljs.rm('-rf', '../../dist/identity-rent');
       if (!existDist) shelljs.mkdir('-p', resolve('../../dist'));
 
-      shelljs.mv('-f', buildPath, resolve('./identity-saas'));
-      shelljs.mv('-f', resolve('./identity-saas'), resolve('../../dist'));
-      shelljs.cp('-f', resolve('../../dist/identity-saas/mockServiceWorker.js'), resolve('../../dist'));
+      shelljs.mv('-f', buildPath, resolve('./identity-rent'));
+      shelljs.mv('-f', resolve('./identity-rent'), resolve('../../dist'));
+      shelljs.cp('-f', resolve('../../dist/identity-rent/mockServiceWorker.js'), resolve('../../dist'));
     });
   },
 });

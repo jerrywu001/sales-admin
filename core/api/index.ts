@@ -73,11 +73,14 @@ export interface ISidebarMenu {
 export enum ESystemType {
   /** SAAS */
   SAAS = 0,
+  /** 租赁 */
+  RENT = 1,
 }
 
 export const systemTypeKey = {
   // 空
   [ESystemType.SAAS]: 'saas',
+  [ESystemType.RENT]: 'rent',
 };
 
 export const getSuffixName = () => {
@@ -86,6 +89,8 @@ export const getSuffixName = () => {
   const suffix = {
     // 主应用后缀
     [ESystemType.SAAS]: '平台',
+    // 租赁后缀
+    [ESystemType.RENT]: '租赁',
   }[a];
 
   return suffix ? `-${suffix}` : '';

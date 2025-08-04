@@ -62,6 +62,9 @@ declare global {
   /** app port */
   declare const __MAIN_APP_PORT__: boolean;
 
+  /** 租赁端口 */
+  declare const __RENT_APP_PORT__: boolean;
+
   declare const $: any;
 
   // CSS modules

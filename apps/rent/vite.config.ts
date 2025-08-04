@@ -67,7 +67,7 @@ export default defineConfig(({ command, mode }) => {
       __BUILD_BY_VITE__: JSON.stringify(true),
     },
     server: {
-      port: Number(env.MAIN_APP_PORT) || undefined,
+      port: Number(env.RENT_APP_PORT) || undefined,
       https: env.HTTPS === 'true'
         ? {
           key: fs.readFileSync(path.join(__dirname, '../../keys/cert.key')),
@@ -94,12 +94,12 @@ export default defineConfig(({ command, mode }) => {
       AfterBuild(() => {
         const existDist = fs.existsSync(resolve('../../dist'));
 
-        if (existDist) shelljs.rm('-rf', '../../dist/identity-saas');
+        if (existDist) shelljs.rm('-rf', '../../dist/identity-rent');
         if (!existDist) shelljs.mkdir('-p', resolve('../../dist'));
 
-        shelljs.mv('-f', buildPath, resolve('./identity-saas'));
-        shelljs.mv('-f', resolve('./identity-saas'), resolve('../../dist'));
-        shelljs.cp('-f', resolve('../../dist/identity-saas/mockServiceWorker.js'), resolve('../../dist'));
+        shelljs.mv('-f', buildPath, resolve('./identity-rent'));
+        shelljs.mv('-f', resolve('./rent'), resolve('../../dist'));
+        shelljs.cp('-f', resolve('../../dist/identity-rent/mockServiceWorker.js'), resolve('../../dist'));
       }),
     ],
     // https://vitest.dev/guide/#examples

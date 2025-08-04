@@ -16,7 +16,7 @@
     "@vue-office/pdf": "^2.0.10",
     "@vue-office/pptx": "^1.0.1",
     "@vue3/components": "workspace:^",
-    "@vueuse/core": "^13.5.0",
+    "@vueuse/core": "^13.6.0",
     "big.js": "6.2.2",
     "core-js": "^3.44.0",
     "dayjs": "^1.11.13",

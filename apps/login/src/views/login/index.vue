@@ -128,11 +128,15 @@ function checkIdentity() {
   const ports = {
     // 主应用端口
     [ESystemType.SAAS]: __MAIN_APP_PORT__,
+    // 租赁端口
+    [ESystemType.RENT]: __RENT_APP_PORT__,
   };
 
   const prefixs = {
     //
     [ESystemType.SAAS]: 'identity-saas',
+    // 租赁
+    [ESystemType.RENT]: 'identity-rent',
   };
 
   const systemTypeStr = getSysTypeValue();

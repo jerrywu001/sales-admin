@@ -57,6 +57,7 @@ export default defineConfig(({ command, mode }) => {
 
       __LOGIN_APP_PORT__: JSON.stringify(env.LOGIN_APP_PORT),
       __MAIN_APP_PORT__: JSON.stringify(env.MAIN_APP_PORT),
+      __RENT_APP_PORT__: JSON.stringify(env.RENT_APP_PORT),
       __ENV_DEV__: JSON.stringify(!isBuild),
       __PROD__HOST_API__: JSON.stringify(env.API_HOST),
       __ENABLE_DEV_MOCK__: JSON.stringify(env.ENABLE_MOCK === 'true'),
