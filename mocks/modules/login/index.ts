@@ -35,6 +35,14 @@ const handlers = [
       },
     });
   }),
+  http.post<any, any>(`${baseUrl}/iam/sms/send/not-login`, async () => {
+    await delay(500);
+
+    return HttpResponse.json({
+      code: successCode,
+      message: null,
+    });
+  }),
 ];
 
 export default handlers;

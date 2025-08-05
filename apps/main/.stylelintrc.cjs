@@ -8,6 +8,7 @@ module.exports = {
   ],
   // rule覆盖（根据自己喜好来配置）
   rules: {
+    'no-invalid-position-declaration': null,
     'color-function-alias-notation': 'with-alpha',
     'at-rule-no-unknown': null,
     'at-rule-no-deprecated': null,

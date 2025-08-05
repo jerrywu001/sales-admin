@@ -14,6 +14,8 @@ export {
   OfficePreview,
 };
 
+export { default as SmsButton } from './src/sms-button/SmsButton.vue';
+
 export * from './src/not-support-browser';
 export * from './src/message-box/useMessageBox';
 

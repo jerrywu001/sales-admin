@@ -129,3 +129,30 @@ export const StorageKeys = {
   sidebarCollapseKey: 'sidebar-collapse',
   mockEnvSysTypeKey: 'mockEnvSysType',
 };
+
+export enum ESmsType {
+  /** 登录 */
+  Login = 9,
+  /** 修改密码 */
+  EditPass = 1,
+  /** 修改手机号（原手机号） */
+  OldEditPhone = 2,
+  /** 修改手机号(新手机号) */
+  EditPhone = 3,
+  /** 找回密码 */
+  FindPass = 0,
+  /** 修改支付密码 */
+  UpdatePayPwd = 11,
+  /** 修改支付手机号(原来) */
+  UpdatePayPhoneOld = 12,
+  /** 修改支付手机号(新) */
+  UpdatePayPhoneNew = 13,
+  /** 支付发送验证码 */
+  SplitBill = 14,
+  /** 企业降级 */
+  DowngradeCompany = 15,
+  /** 集团-企业解绑 */
+  UnBindCompany = 16,
+  /** 内部转账 */
+  InternalTransfer = 18,
+}

@@ -1,4 +1,4 @@
-import { ESystemType } from '..';
+import { ESmsType, ESystemType } from '..';
 import { Http } from '../axios-request/Axios';
 import { EAxiosResponseCode, getHttpErrorMessage } from '../axios-request/IAxiosRequest';
 import { getHostbaseUrl, isNull } from '@core/tools';
@@ -70,6 +70,28 @@ export async function queryLoginInfo() {
   return result;
 }
 
+/**
+ * * 未登录发送验证码
+ * @param sendType
+ * @param phone
+ * @param isCheck 是否检查手机号存在
+ */
+export async function sendNotLoginSmscode(sendType: ESmsType, phone: string, isCheck = false) {
+  try {
+    const { code, message } = await Http.post<void>(`${hostUrl}/iam/sms/send/not-login`, {
+      sendType,
+      phone,
+      isCheck,
+    });
+
+    if (code !== EAxiosResponseCode.Succeed) {
+      throw new Error(message || '发送失败，请稍后再试~');
+    }
+  } catch (error) {
+    throw new Error(getHttpErrorMessage(error));
+  }
+}
+
 export interface IUserInfo {
   /** 用户id */
   userId: number;
@@ -82,10 +104,14 @@ export interface IUserInfo {
 }
 
 export interface IUserParam {
+  /** 验证码 */
+  code?: string;
   /** 手机号 */
   username: string;
   /** 密码（loginMethod===1） */
   password?: string;
+  /** 登录方式：0 验证码，1 密码 */
+  loginMethod: 0 | 1;
 }
 
 export interface IGetPassWordParam {
