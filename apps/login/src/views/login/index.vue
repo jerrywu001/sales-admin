@@ -124,9 +124,9 @@ import Beams from '@/layout/Beams.vue';
 import { GlobalTitle } from '@core/main';
 import { SmsButton, SvgIcon, onConfirm } from '@vue3/components';
 import { useTitle } from '@vueuse/core';
-import { ESmsType, ESystemType, type IUserParam, getSysTypeValue, getToken, loginToServer, removeToken, sendNotLoginSmscode, setToken, updateSysType } from '@core/api';
+import { ESmsType, type IUserParam, getToken, loginToServer, sendNotLoginSmscode, setToken } from '@core/api';
 import { computed, h, onBeforeMount, reactive, ref } from 'vue';
-import { checkPass, checkPhone, checkSmsCode, isNull } from '@core/tools';
+import { checkPass, checkPhone, checkSmsCode } from '@core/tools';
 import { Message } from '@arco-design/web-vue';
 
 useTitle(`登录-${GlobalTitle}`);
@@ -236,12 +236,10 @@ async function continueLogin() {
   logining.value = true;
 
   try {
-    const { token, systemType } = await loginToServer(formState);
-
-    updateSysType(!isNull(systemType) ? String(systemType) : String(ESystemType.SAAS));
+    const { token } = await loginToServer(formState);
 
     setToken(token);
-    checkIdentity();
+    // TODO
   } catch (error) {
     const err = error as Error;
 
@@ -251,45 +249,6 @@ async function continueLogin() {
   setTimeout(() => {
     logining.value = false;
   }, 500);
-}
-
-/**
- * 登录后判断身份跳转端口
- */
-function checkIdentity() {
-  const ports = {
-    // 主应用端口
-    [ESystemType.SAAS]: __MAIN_APP_PORT__,
-    // 租赁端口
-    [ESystemType.RENT]: __RENT_APP_PORT__,
-  };
-
-  const prefixs = {
-    //
-    [ESystemType.SAAS]: 'identity-saas',
-    // 租赁
-    [ESystemType.RENT]: 'identity-rent',
-  };
-
-  const systemTypeStr = getSysTypeValue();
-  const systemType = isNull(systemTypeStr) ? undefined : Number(systemTypeStr);
-
-  if (systemType === undefined) {
-    Message.error('获取身份失败');
-
-    removeToken();
-    return;
-  }
-
-  try {
-    if (__ENV_DEV__) {
-      window.location.href = `${location.protocol}//${location.hostname}:${ports[systemType]}/${prefixs[systemType!]}`;
-    } else {
-      window.location.href = `/${prefixs[systemType!]}`;
-    }
-  } catch (error) {
-    Message.error((error as Error).message);
-  }
 }
 
 function onTabsChange(smsMode: boolean) {
@@ -348,11 +307,13 @@ function getProtocol(key = 'agreement' as 'agreement' | 'secretPolicy') {
 function openService(key = 'agreement' as 'agreement' | 'secretPolicy', e: MouseEvent) {
   e.stopPropagation();
 
-  window.open(`/account/office-previewer?url=${getProtocol(key)}`);
+  window.open(`/office-previewer?url=${getProtocol(key)}`);
 }
 
 onBeforeMount(() => {
-  if (getToken()) checkIdentity();
+  if (getToken()) {
+    // TODO
+  }
 });
 
 </script>

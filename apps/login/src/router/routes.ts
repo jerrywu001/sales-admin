@@ -4,10 +4,6 @@ import { Page404 } from '@vue3/components';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/login',
-  },
-  {
-    path: '/login',
     name: 'login',
     meta: { title: '登录' },
     component: () => import('../views/login/index.vue'),

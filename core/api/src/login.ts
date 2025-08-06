@@ -1,7 +1,7 @@
-import { ESmsType, ESystemType } from '..';
+import { ESmsType } from '..';
 import { Http } from '../axios-request/Axios';
 import { EAxiosResponseCode, getHttpErrorMessage } from '../axios-request/IAxiosRequest';
-import { getHostbaseUrl, isNull } from '@core/tools';
+import { getHostbaseUrl } from '@core/tools';
 
 const hostUrl = getHostbaseUrl();
 
@@ -19,7 +19,6 @@ export async function loginToServer(param: IUserParam, agentId?: number) {
 
     if (code === EAxiosResponseCode.Succeed) {
       obj = context || {} as ILoginResult;
-      obj.systemType = isNull(obj.systemType) ? undefined : obj.systemType;
     } else {
       throw new Error(message || '服务器异常，请稍后再试~');
     }
@@ -128,8 +127,6 @@ export interface IGetPassWordParam {
 export interface ILoginResult {
   /** 登录token */
   token: string;
-  /** 系统类型 */
-  systemType: ESystemType;
   /** 首次登录时需要修改默认密码，修改默认密码时需携带确认码 */
   code: string;
 }

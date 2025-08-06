@@ -45,8 +45,8 @@ export const useUserStore = defineStore('user-store', () => {
     }
   }
 
-  function afterLogout() {
-    const redirectPath = '/account/login';
+  function afterLogout() { // TODO
+    const redirectPath = '/login';
 
     updateToken('');
     updatePermissions([]);

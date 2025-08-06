@@ -87,9 +87,6 @@ defineProps({
   },
 });
 
-const BroadcastChannelName = 'BroadcastChannelName';
-const LogoutEventName = 'logout';
-
 const router = useRouter();
 const route = useRoute();
 
@@ -118,10 +115,6 @@ const doLogout = () => {
     type: 'warning',
     onOk: async () => {
       await logout();
-
-      const bc = new BroadcastChannel(BroadcastChannelName);
-
-      bc.postMessage(LogoutEventName);
     },
   });
 };

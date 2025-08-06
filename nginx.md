@@ -21,28 +21,10 @@ server {
 
   root /xxx/xxx;
   # index index.html index.htm;
-        
-  location = / {
-    return 301 /account;
-  }
-
-  location /account {
-    index  index.html;
-    try_files  $uri $uri/ /account/index.html;
-  }
-
-  location /identity-saas {
-    index  index.html;
-    try_files  $uri $uri/ /identity-saas/index.html;
-  }
-
-  location /identity-rent {
-    index  index.html;
-    try_files  $uri $uri/ /identity-rent/index.html;
-  }
 
   location / {
-    try_files $uri $uri/ =404;
+    index  index.html;
+    try_files  $uri $uri/ /account/index.html;
   }
 }
 ```

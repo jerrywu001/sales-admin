@@ -2,7 +2,6 @@ import { ITab, defaultTab, tabState, indexPath } from '../..';
 import { RouteLocationNormalizedLoadedGeneric } from 'vue-router';
 import { defineStore } from 'pinia';
 import { computed, nextTick, ref } from 'vue';
-import { getSuffixName } from '@core/api';
 
 export const useTabsStore = defineStore('tabs-store', () => {
   const tabList = ref<Array<ITab>>([defaultTab]);
@@ -27,7 +26,7 @@ export const useTabsStore = defineStore('tabs-store', () => {
         item.meta.title = title;
       }
 
-      document.title = title + getSuffixName();
+      document.title = title;
     }
   }
 

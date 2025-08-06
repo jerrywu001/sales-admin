@@ -66,11 +66,11 @@ export const getVueRoutes = (items: RouteConfig[]) => {
   } as RouteRecordRaw));
 };
 
-export function previewOfficeFile(url: string) {
+export function previewOfficeFile(url: string) { // TODO
   if (__ENV_DEV__) {
-    window.open(`${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}/account/office-previewer?url=${url}`);
+    window.open(`${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}/office-previewer?url=${url}`);
   } else {
-    window.open(`/account/office-previewer?url=${url}`);
+    window.open(`/office-previewer?url=${url}`);
   }
 }
 

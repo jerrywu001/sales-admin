@@ -1,7 +1,6 @@
 import { getCosFileName } from '@core/tools';
 import { Http } from './axios-request/Axios';
 import { EAxiosResponseCode, getHttpErrorMessage } from './axios-request/IAxiosRequest';
-import Cookies from 'js-cookie';
 export * from './src/auth';
 
 export * from './src/common';
@@ -70,32 +69,6 @@ export interface ISidebarMenu {
   children?: ISidebarMenu[];
 }
 
-export enum ESystemType {
-  /** SAAS */
-  SAAS = 0,
-  /** 租赁 */
-  RENT = 1,
-}
-
-export const systemTypeKey = {
-  // 空
-  [ESystemType.SAAS]: 'saas',
-  [ESystemType.RENT]: 'rent',
-};
-
-export const getSuffixName = () => {
-  const a = Number(Cookies.get(StorageKeys.systemTypeKey)) as ESystemType;
-
-  const suffix = {
-    // 主应用后缀
-    [ESystemType.SAAS]: '平台',
-    // 租赁后缀
-    [ESystemType.RENT]: '租赁',
-  }[a];
-
-  return suffix ? `-${suffix}` : '';
-};
-
 /**
  * 空中分账 - 分账管理 - 收款方管理
  */
@@ -124,7 +97,6 @@ export const StorageKeys = {
    * @description token key
    */
   TokenKey: 'PLATFORM-TOKEN',
-  systemTypeKey: 'systemType',
   /** sidebar collapse storage key */
   sidebarCollapseKey: 'sidebar-collapse',
   mockEnvSysTypeKey: 'mockEnvSysType',

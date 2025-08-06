@@ -173,17 +173,16 @@ export class AxiosRequest {
 }
 
 function toLoginPage() {
-  if (window.location.pathname.startsWith('/account/login')) return;
-
-  const redirectPath = '/account/login';
-
   removeToken();
 
+  // const oauth2Host = `${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}`;
+
+  // https://localhost:8301/oauth2/authorize?response_type=code&client_id=your-client-id&redirect_uri=localhost:8301/api/callback
+
   if (__ENV_DEV__) {
-    window.location.href = `${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}${redirectPath}`;
+    window.location.href = `${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}`;
   } else {
-    console.log('to Login Page', redirectPath);
-    window.location.href = redirectPath;
+    window.location.href = 'redirectPath'; // TODO
   }
 }
 

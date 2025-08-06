@@ -1,7 +1,6 @@
-import { getSystemTypeFromUrl, ISidebarMenu, ITopMenu, IUserInfo, queryLoginInfo, querySidebarMenus, updateSysType } from '@core/api';
+import { ISidebarMenu, ITopMenu, IUserInfo, queryLoginInfo, querySidebarMenus } from '@core/api';
 import { Router, RouteRecordRaw } from 'vue-router';
 import NProgress from 'nprogress';
-import { isNull } from '@core/tools';
 import { Message } from '@arco-design/web-vue';
 import { addIsThirdProperty, defaultTab, indexPath, updateNullLayoutToDefault } from '../..';
 
@@ -24,12 +23,6 @@ export const setupRouter = async (router: Router, createRoutesFromMenu: (menu: I
     enabled = info.enabled;
   } catch (error) {
     Message.error((error as Error).message);
-  }
-
-  const systemTypeFromUrl = getSystemTypeFromUrl();
-
-  if (!isNull(systemTypeFromUrl)) {
-    updateSysType(String(systemTypeFromUrl));
   }
 
   try {

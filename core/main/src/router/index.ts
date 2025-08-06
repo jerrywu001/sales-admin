@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { getSuffixName, ISidebarMenu } from '@core/api';
+import { ISidebarMenu } from '@core/api';
 import NProgress from 'nprogress';
 
 import 'nprogress/nprogress.css';
@@ -16,7 +16,7 @@ export function createAppRouter(insetRoutes: RouteRecordRaw[]) {
     NProgress.start();
 
     if (to.meta.title) {
-      document.title = to.meta.title + getSuffixName();
+      document.title = to.meta.title as string;
     }
 
     next();

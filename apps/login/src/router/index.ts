@@ -12,7 +12,12 @@ const router = createRouter({
 NProgress.configure({ showSpinner: false });
 
 router.beforeEach((to, from, next) => {
+  if (to.path.startsWith('/oauth2')) {
+    return false;
+  }
+
   NProgress.start();
+
   next();
 });
 
