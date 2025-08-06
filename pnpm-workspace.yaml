@@ -2,6 +2,7 @@ packages:
 - 'assets'
 - 'docs'
 - 'mocks'
+- 'auth'
 - 'tailwindconfig'
 - 'components/**'
 - 'core/**'

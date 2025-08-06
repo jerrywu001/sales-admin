@@ -3,15 +3,18 @@ import { Http } from '../axios-request/Axios';
 import { EAxiosResponseCode, getHttpErrorMessage } from '../axios-request/IAxiosRequest';
 import { getHostbaseUrl } from '@core/tools';
 
+const isMock = __ENABLE_DEV_MOCK__;
 const hostUrl = getHostbaseUrl();
 
 export async function loginToServer(param: IUserParam, agentId?: number) {
   let obj = {} as ILoginResult;
 
+  const host = isMock ? 'http://localhost:3009' : hostUrl;
+
   param = JSON.parse(JSON.stringify(param)) as IUserParam;
 
   try {
-    const { code, context, message } = await Http.post<ILoginResult>(`${hostUrl}/iam/login`, {
+    const { code, context, message } = await Http.post<ILoginResult>(`${host}/iam/login`, {
       ...param,
       loginMethod: undefined,
       agentId: __ENV_DEV__ ? undefined : agentId || undefined,
@@ -31,9 +34,10 @@ export async function loginToServer(param: IUserParam, agentId?: number) {
 
 export async function doLogout() {
   let errMsg = '';
+  const host = isMock ? 'http://localhost:3009' : hostUrl;
 
   try {
-    const { code, message } = await Http.delete<void>(`${hostUrl}/iam/login/logout`, {});
+    const { code, message } = await Http.delete<void>(`${host}/iam/login/logout`, {});
 
     if (code !== EAxiosResponseCode.Succeed) {
       errMsg = message || '退出失败，请稍后再试~';

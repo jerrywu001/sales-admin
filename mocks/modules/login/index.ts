@@ -6,27 +6,14 @@ const successCode = '0';
 
 const baseUrl = getHostbaseUrl();
 
-const getTokenStr = () => {
-  return URL && URL.createObjectURL ? URL.createObjectURL(new Blob()).substr(-36) : 'xxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-};
-
 const handlers = [
-  http.get(`${baseUrl}/iam/user/info`, () => {
-    // const authed = request.headers.get('Authorization');
+  http.get(`${baseUrl}/iam/user/info`, ({ request }) => {
+    const authed = request.headers.get('Authorization');
 
     return HttpResponse.json({
-      code: successCode,
+      code: authed ? successCode : '401',
       message: null,
       context: loginInfo,
-    });
-  }),
-  http.post<any, { password: string }>(`${baseUrl}/iam/login`, async () => {
-    await delay(500);
-
-    return HttpResponse.json({
-      code: successCode,
-      message: null,
-      context: { token: getTokenStr() },
     });
   }),
   http.post<any, any>(`${baseUrl}/iam/sms/send/not-login`, async () => {

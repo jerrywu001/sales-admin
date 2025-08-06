@@ -124,8 +124,8 @@ import Beams from '@/layout/Beams.vue';
 import { GlobalTitle } from '@core/main';
 import { SmsButton, SvgIcon, onConfirm } from '@vue3/components';
 import { useTitle } from '@vueuse/core';
-import { ESmsType, type IUserParam, getToken, loginToServer, sendNotLoginSmscode, setToken } from '@core/api';
-import { computed, h, onBeforeMount, reactive, ref } from 'vue';
+import { ESmsType, type IUserParam, loginToServer, sendNotLoginSmscode } from '@core/api';
+import { computed, h, reactive, ref } from 'vue';
 import { checkPass, checkPhone, checkSmsCode } from '@core/tools';
 import { Message } from '@arco-design/web-vue';
 
@@ -236,10 +236,7 @@ async function continueLogin() {
   logining.value = true;
 
   try {
-    const { token } = await loginToServer(formState);
-
-    setToken(token);
-    // TODO
+    await loginToServer(formState);
   } catch (error) {
     const err = error as Error;
 
@@ -309,12 +306,6 @@ function openService(key = 'agreement' as 'agreement' | 'secretPolicy', e: Mouse
 
   window.open(`/office-previewer?url=${getProtocol(key)}`);
 }
-
-onBeforeMount(() => {
-  if (getToken()) {
-    // TODO
-  }
-});
 
 </script>
 

@@ -175,14 +175,12 @@ export class AxiosRequest {
 function toLoginPage() {
   removeToken();
 
-  // const oauth2Host = `${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}`;
+  const oauth2Path = `oauth2/authorize?response_type=code&client_id=TODO&redirect_uri=${location.host}/api/callback`;
 
-  // https://localhost:8301/oauth2/authorize?response_type=code&client_id=your-client-id&redirect_uri=localhost:8301/api/callback
-
-  if (__ENV_DEV__) {
-    window.location.href = `${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}`;
+  if (__ENABLE_DEV_MOCK__) {
+    window.location.href = `http://localhost:3009/${oauth2Path}`;
   } else {
-    window.location.href = 'redirectPath'; // TODO
+    window.location.href = `http://localhost:3009/${oauth2Path}`; // TODO 字典取值
   }
 }
 
@@ -197,6 +195,7 @@ function resolveHttpStatus(status: number, url = '') {
       break;
 
     case EAxiosResponseCode.Unauthorized:
+      debugger;
       toLoginPage();
       printErrorMsg('身份验证过期，需要重新登录');
       break;
