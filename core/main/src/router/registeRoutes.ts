@@ -1,8 +1,31 @@
-import { ISidebarMenu, ITopMenu, IUserInfo, queryLoginInfo, querySidebarMenus } from '@core/api';
-import { Router, RouteRecordRaw } from 'vue-router';
+import { getSecureState, getToken, ISidebarMenu, ITopMenu, IUserInfo, queryAccessToken, queryLoginInfo, querySidebarMenus, removeSecureState, setToken, toOauthAPI } from '@core/api';
+import { RouteLocationNormalizedLoadedGeneric, Router, RouteRecordRaw } from 'vue-router';
 import NProgress from 'nprogress';
 import { Message } from '@arco-design/web-vue';
 import { addIsThirdProperty, defaultTab, indexPath, updateNullLayoutToDefault } from '../..';
+import { parseQueryString } from '@core/tools';
+import { nextTick, reactive } from 'vue';
+
+export const authGlobalState = reactive({ clearAuthSignal: 0 });
+
+export const cleanAuthQuery = (signal: number, router: Router, route: RouteLocationNormalizedLoadedGeneric) => {
+  console.log('clearAuthSignal', signal);
+
+  if (!signal) return;
+
+  removeSecureState();
+
+  nextTick(() => {
+    router.replace({
+      path: route.path,
+      query: {
+        ...route.query,
+        code: undefined,
+        state: undefined,
+      },
+    });
+  });
+};
 
 export const setupRouter = async (router: Router, createRoutesFromMenu: (menu: ISidebarMenu[]) => RouteRecordRaw[]): Promise<IRouteMenuData> => {
   NProgress.start();
@@ -15,6 +38,56 @@ export const setupRouter = async (router: Router, createRoutesFromMenu: (menu: I
   let topMenus: ITopMenu[] = [];
   let sideMenus: ISidebarMenu[] = [];
   let permissions: string[] = [];
+
+  const emptyResult: IRouteMenuData = {
+    name: '',
+    phone: '',
+    enabled: 0 as 0 | 1,
+    menuData: [],
+    permissions: [],
+    topMenus: [],
+    sideMenus: [],
+  };
+
+  const secureStateFromStorage = getSecureState();
+
+  const query = parseQueryString<{
+    code: string;
+    state: string;
+  }>();
+
+  if (query.code) {
+    const {
+      token,
+      errMsg,
+    } = await queryAccessToken(query.code);
+
+    if (errMsg) {
+      Message.error(errMsg);
+      return emptyResult;
+    }
+
+    if (!token) {
+      Message.error('获取token失败');
+      return emptyResult;
+    }
+
+    await setToken(token);
+    authGlobalState.clearAuthSignal++;
+  }
+
+  if (query.state && secureStateFromStorage && query.state !== secureStateFromStorage) {
+    Message.error('非法请求');
+    return emptyResult;
+  }
+
+  const savedToken = await getToken();
+
+  if (!savedToken) {
+    toOauthAPI();
+
+    return emptyResult;
+  }
 
   try {
     info = await queryLoginInfo();

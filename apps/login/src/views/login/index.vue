@@ -1,3 +1,4 @@
+// oxlint-disable no-invalid-regexp
 <template>
   <beams>
     <div class="login-box">
@@ -126,7 +127,7 @@ import { SmsButton, SvgIcon, onConfirm } from '@vue3/components';
 import { useTitle } from '@vueuse/core';
 import { ESmsType, type IUserParam, loginToServer, sendNotLoginSmscode } from '@core/api';
 import { computed, h, reactive, ref } from 'vue';
-import { checkPass, checkPhone, checkSmsCode } from '@core/tools';
+import { checkPass, checkPhone, checkSmsCode, parseQueryString } from '@core/tools';
 import { Message } from '@arco-design/web-vue';
 
 useTitle(`登录-${GlobalTitle}`);
@@ -232,11 +233,25 @@ function doLogin() {
   continueLogin();
 }
 
+async function fetchBrandInfo() {
+  // TODO
+  const { client_id = '' } = getQueryData();
+
+  await console.log('client_id', client_id);
+}
+
 async function continueLogin() {
   logining.value = true;
 
   try {
-    await loginToServer(formState);
+    const { state, redirectUrl } = getQueryData();
+    const { code = '' } = await loginToServer(formState);
+
+    if (redirectUrl) {
+      const confirRedirectUrl = redirectUrl.includes('?') ? redirectUrl : `${redirectUrl}?`;
+
+      location.href = `${confirRedirectUrl}&code=${code}&state=${state}`;
+    }
   } catch (error) {
     const err = error as Error;
 
@@ -307,6 +322,24 @@ function openService(key = 'agreement' as 'agreement' | 'secretPolicy', e: Mouse
   window.open(`/office-previewer?url=${getProtocol(key)}`);
 }
 
+function getQueryData() {
+  const querString = location.href.split('&redirect_uri=')[0];
+  const redirectUrl = location.href.split('&redirect_uri=')[1];
+  const query = parseQueryString<{
+    client_id: string;
+    state: string;
+  }>(`?${querString.split('?')[1]}`);
+
+  const { client_id = '', state = '' } = query;
+
+  return {
+    client_id: client_id || '',
+    state: state || '',
+    redirectUrl: redirectUrl || '',
+  };
+}
+
+fetchBrandInfo();
 </script>
 
 <style lang="scss">

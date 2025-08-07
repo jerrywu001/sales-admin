@@ -98,6 +98,33 @@ const handlers = [
       context: {},
     });
   }),
+  http.post<any, { password: string }>(`${baseUrl}/iam/login`, async () => {
+    await delay(500);
+
+    return HttpResponse.json({
+      code: successCode,
+      message: null,
+      context: { code: '11111111' },
+    });
+  }),
+  http.get(`${baseUrl}/iam/get-token`, async () => {
+    await delay(500);
+
+    return HttpResponse.json({
+      code: successCode,
+      message: null,
+      context: { token: 'LzMM9DKl74I9kkqj2iqoM006teHXk3KwOE1X0wNjHQ1dzEIrsx' },
+    });
+  }),
+  http.delete(`${baseUrl}/iam/login/logout`, async () => {
+    await delay(900);
+
+    return HttpResponse.json({
+      code: successCode,
+      message: null,
+      context: {},
+    });
+  }),
 ];
 
 export default handlers;

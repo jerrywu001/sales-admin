@@ -1,6 +1,7 @@
-import { getCosFileName } from '@core/tools';
+import { generateRandomString, getCosFileName } from '@core/tools';
 import { Http } from './axios-request/Axios';
 import { EAxiosResponseCode, getHttpErrorMessage } from './axios-request/IAxiosRequest';
+import { removeToken, setSecureState } from './src/auth';
 export * from './src/auth';
 
 export * from './src/common';
@@ -92,7 +93,29 @@ export async function downloadLinkFile(fileUrl: string) {
   }
 }
 
+export function toOauthAPI() {
+  const { href } = location;
+  const [path, search] = href.split('?');
+  const uuid = generateRandomString();
+
+  // TODO: 通过域名获取client_id
+  const client_id = 'TODO';
+  const redirectUrl = encodeURIComponent(path + (search ? `?${search}` : ''));
+  const oauth2Path = `oauth2/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirectUrl}&state=${uuid}`;
+
+  removeToken();
+  setSecureState(uuid);
+
+  if (__ENABLE_DEV_MOCK__) {
+    window.location.href = `http://localhost:3009/${oauth2Path}`;
+  } else {
+    window.location.href = `http://localhost:3009/${oauth2Path}`; // TODO 字典取值
+  }
+}
+
 export const StorageKeys = {
+  /** 防止重刷 */
+  SecureState: 'SecureState',
   /**
    * @description token key
    */

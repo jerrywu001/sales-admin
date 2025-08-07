@@ -5,6 +5,7 @@
   ],
   // https://oxc.rs/docs/guide/usage/linter/rules
   "rules": {
+    "no-debugger": "off",
     "oxc/no-barrel-file": "error",
     "oxc/bad-bitwise-operator": "error",
 

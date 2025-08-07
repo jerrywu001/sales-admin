@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosPromise, AxiosResponse } from 'axios';
-import { getToken, removeToken } from '../src/auth';
+import { isNull, parseQueryString } from '@core/tools';
+import { getToken, setToken } from '../src/auth';
 import {
   EAxiosResponseCode,
   getHttpErrorMessage,
@@ -8,7 +9,7 @@ import {
   RequestConfig,
 } from './IAxiosRequest';
 import { Message } from '@arco-design/web-vue';
-import { isNull } from '@core/tools';
+import { toOauthAPI } from '..';
 
 const defaultTimeout = 200000;
 
@@ -134,9 +135,15 @@ export class AxiosRequest {
   static setResponseInterceptors() {
     axios.interceptors.response.use(
       (response) => {
-        const { config = {}, data, status } = response;
+        const { config = {}, data, status, headers } = response;
 
         const code = Number(!data ? -1 : data?.code ?? EAxiosResponseCode.Succeed);
+
+        const newToken = headers['x-new-access-token'];
+
+        if (newToken) {
+          setToken(newToken);
+        }
 
         if (status.toString() !== EAxiosResponseCode.OriginalSucceed) {
           resolveHttpStatus(status, config.url);
@@ -172,16 +179,12 @@ export class AxiosRequest {
   }
 }
 
-function toLoginPage() {
-  removeToken();
+function resolveLogin() {
+  const query = parseQueryString<{ code: string }>();
 
-  const oauth2Path = `oauth2/authorize?response_type=code&client_id=TODO&redirect_uri=${location.host}/api/callback`;
+  if (query.code) return;
 
-  if (__ENABLE_DEV_MOCK__) {
-    window.location.href = `http://localhost:3009/${oauth2Path}`;
-  } else {
-    window.location.href = `http://localhost:3009/${oauth2Path}`; // TODO 字典取值
-  }
+  toOauthAPI();
 }
 
 /**
@@ -195,13 +198,12 @@ function resolveHttpStatus(status: number, url = '') {
       break;
 
     case EAxiosResponseCode.Unauthorized:
-      debugger;
-      toLoginPage();
+      resolveLogin();
       printErrorMsg('身份验证过期，需要重新登录');
       break;
 
     case EAxiosResponseCode.Rejected:
-      toLoginPage();
+      resolveLogin();
       printErrorMsg('登录过期，需要重新登录');
       break;
 

@@ -1,4 +1,4 @@
-import { doLogout, getToken, removeToken } from '@core/api';
+import { doLogout, getToken, queryLoginInfo, removeToken } from '@core/api';
 import { Message } from '@arco-design/web-vue';
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
@@ -46,18 +46,11 @@ export const useUserStore = defineStore('user-store', () => {
   }
 
   function afterLogout() { // TODO
-    const redirectPath = '/login';
-
     updateToken('');
     updatePermissions([]);
     removeToken();
 
-    if (__ENV_DEV__) {
-      window.location.href = `${location.protocol}//${location.hostname}:${__LOGIN_APP_PORT__}${redirectPath}`;
-    } else {
-      console.log('to Login Page from hooks');
-      window.location.href = redirectPath;
-    }
+    queryLoginInfo();
   }
 
   return {

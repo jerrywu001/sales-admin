@@ -16,7 +16,20 @@ export function setToken(token: string, rememberMe = 0) {
   Cookies.set(StorageKeys.TokenKey, token);
 }
 
+export function getSecureState() {
+  return sessionStorage.getItem(StorageKeys.SecureState);
+}
+
+export function setSecureState(uuid: string) {
+  sessionStorage.setItem(StorageKeys.SecureState, uuid);
+}
+
+export function removeSecureState() {
+  sessionStorage.removeItem(StorageKeys.SecureState);
+}
+
 export function removeToken() {
   Cookies.remove(StorageKeys.TokenKey);
   Cookies.remove(StorageKeys.mockEnvSysTypeKey);
+  sessionStorage.removeItem(StorageKeys.SecureState);
 }
