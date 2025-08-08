@@ -1,13 +1,14 @@
+@import url(./colors/index.scss);
+@import url(./custom-input.scss);
+
 #app,
 body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
   position: relative;
+  background-color: var(--color-bg-1);
 }
-
-@import url(./colors/index.scss);
-@import url(./custom-input.scss);
 
 * {
   outline: none;

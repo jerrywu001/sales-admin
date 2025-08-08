@@ -1,8 +1,8 @@
 <template>
   <a-breadcrumb class="flex items-center pb-3">
-    <a-breadcrumb-item class="flex items-center">
+    <!-- <a-breadcrumb-item class="flex items-center">
       <svg-icon icon="nrk:category" class="!w-4" />
-    </a-breadcrumb-item>
+    </a-breadcrumb-item> -->
 
     <a-breadcrumb-item
       v-for="(v, idx) in menusStore.breadcrumbs"

@@ -12,6 +12,6 @@
 
 <style lang="scss">
 .adjust {
-  @apply max-w-[33.333%] basis-1/3 2xl:max-w-[25%] 2xl:basis-1/4 3xl:max-w-[20%] 3xl:basis-1/5 xxl:max-w-[16.6666%] xxl:basis-1/6;
+  @apply max-w-[33.333%] basis-1/3 2xl:max-w-[25%] 2xl:basis-1/4 3xl:max-w-[20%] 3xl:basis-1/5 xxl:max-w-[20%] xxl:basis-1/5;
 }
 </style>

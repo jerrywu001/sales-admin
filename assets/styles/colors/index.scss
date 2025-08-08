@@ -1,2 +1,15 @@
 @import url(./light.scss);
 @import url(./dark.scss);
+
+.arco-card-size-medium .arco-card-header {
+  height: 36px;
+  padding: 16px 16px 0 16px;
+}
+
+
+.main-content {
+  .arco-card {
+    border-radius: 4px;
+    border: none;
+  }
+}

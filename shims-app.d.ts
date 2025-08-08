@@ -57,13 +57,14 @@ declare global {
    */
   declare const __MOCK_PROD__: boolean;
 
-  declare const __LOGIN_APP_PORT__: boolean;
+  /** 登录端口 */
+  declare const __LOGIN_APP_PORT__: string;
 
   /** app port */
-  declare const __MAIN_APP_PORT__: boolean;
+  declare const __MAIN_APP_PORT__: string;
 
   /** 租赁端口 */
-  declare const __RENT_APP_PORT__: boolean;
+  declare const __RENT_APP_PORT__: string;
 
   declare const $: any;
 

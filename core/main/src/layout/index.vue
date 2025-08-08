@@ -228,7 +228,7 @@ onBeforeMount(() => {
 .main-content {
   @apply text-[14px] overflow-y-auto overflow-x-hidden px-[20px] pt-[20px] pb-[32px] box-border relative;
 
-  background-color: var(--color-bg-3);
+  background-color: var(--color-fill-2);
 }
 
 .toggle-sidebar {

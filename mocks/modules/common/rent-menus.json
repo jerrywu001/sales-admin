@@ -1,0 +1,102 @@
+[
+  {
+    "name": "System",
+    "meta": {
+      "title": "系统管理",
+      "icon": "mingcute:settings-1-line",
+      "cache": false
+    },
+    "children": [
+      {
+        "name": "OperationLog",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志",
+          "icon": null,
+          "cache": false
+        }
+      },
+      {
+        "name": "OperationLog1",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志1",
+          "icon": null,
+          "cache": false
+        }
+      },
+      {
+        "name": "OperationLog2",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志2",
+          "icon": null,
+          "cache": false
+        }
+      },
+      {
+        "name": "OperationLog3",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志3",
+          "icon": null,
+          "cache": false
+        }
+      }
+    ]
+  },
+  {
+    "name": "System2",
+    "meta": {
+      "title": "系统管理2",
+      "icon": "mingcute:settings-1-line",
+      "cache": false
+    },
+    "children": [
+      {
+        "name": "OperationLog2-1",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志",
+          "icon": null,
+          "cache": false
+        }
+      },
+      {
+        "name": "OperationLog2-2",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志1",
+          "icon": null,
+          "cache": false
+        }
+      },
+      {
+        "name": "OperationLog2-3",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志2",
+          "icon": null,
+          "cache": false
+        }
+      },
+      {
+        "name": "OperationLog2-4",
+        "layout": "default",
+        "component": "system/operation-log",
+        "meta": {
+          "title": "操作日志3",
+          "icon": null,
+          "cache": false
+        }
+      }
+    ]
+  }
+]

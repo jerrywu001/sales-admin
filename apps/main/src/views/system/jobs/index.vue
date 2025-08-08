@@ -1,37 +1,35 @@
 <template>
-  <content-container title="收款方管理">
+  <content-container title="职位管理">
     <template #search-buttons>
       <!-- 搜索条件区域 -->
       <search-container>
         <search-col>
-          <a-input v-model="params.payeeNo" placeholder="收款方编号" clearable @keyup.enter="doSearch" />
+          <a-input v-model="params.payeeNo" placeholder="职位名称" allow-clear @keyup.enter="doSearch" />
         </search-col>
         <search-col>
-          <a-input v-model="params.name" placeholder="收款方名称" clearable @keyup.enter="doSearch" />
+          <a-input v-model="params.name" placeholder="职位编号" allow-clear @keyup.enter="doSearch" />
         </search-col>
         <search-col>
-          <a-input v-model="params.channelType" placeholder="通道类型" clearable @keyup.enter="doSearch" />
-        </search-col>
-        <search-col>
-          <a-input v-model="params.payeeType" placeholder="收款方类型" clearable @keyup.enter="doSearch" />
-        </search-col>
-        <search-col>
-          <a-input v-model="params.status" placeholder="状态" clearable @keyup.enter="doSearch" />
+          <a-select v-model="params.status" allow-clear placeholder="状态">
+            <a-option value="ENABLED">
+              启用
+            </a-option>
+            <a-option value="DISABLED">
+              禁用
+            </a-option>
+          </a-select>
         </search-col>
         <search-col>
           <a-range-picker
             v-model="dateRange"
+            allow-clear
             type="daterange"
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
             style="width: calc(100% - 4px)"
-            start-placeholder="创建时间(起)"
-            end-placeholder="创建时间(止)"
+            :placeholder="['创建时间(起)', '创建时间(止)']"
             @keydown.enter="doSearch"
           />
-        </search-col>
-        <search-col>
-          <a-input v-model="params.failReason" placeholder="失败原因" clearable @keyup.enter="doSearch" />
         </search-col>
 
         <template #buttons>
@@ -48,10 +46,6 @@
     <template #left-buttons>
       <a-button v-permission="['air:split:payee:add']" type="primary">
         <svg-icon icon="lucide:circle-plus" />新增
-      </a-button>
-
-      <a-button type="primary">
-        <svg-icon icon="gridicons:phone" />手机端注册
       </a-button>
     </template>
 
@@ -75,18 +69,16 @@
         {{ rowIndex + 1 + (params.page - 1) * params.size }}
       </template>
 
+      <template #payeeNo="{ record }">
+        <a>{{ record.payeeNo }}</a>
+      </template>
+
       <template #status="{ record }">
-        <custom-tag
-          :label="PayeeStatusLabel[record.status]"
-          :type="PayeeStatusColor[record.status]"
-        />
+        <a-switch v-model="record.status" checked-value="ENABLED" unchecked-value="DISABLED" />
       </template>
 
       <template #operations>
         <div class="sys-table-links">
-          <a class="sys-link" type="text">
-            查看
-          </a>
           <a class="sys-link" type="text">
             删除
           </a>
@@ -112,12 +104,14 @@
 </template>
 
 <script lang="ts" setup>
-import { SvgIcon, CustomTag } from '@vue3/components';
+import { SvgIcon } from '@vue3/components';
 import { Message } from '@arco-design/web-vue';
 import { computed, ref, reactive } from 'vue';
 import { getRangeDates, ITimeRanger } from '@core/tools';
-import { ITestTableParam, defaultPageSize, IPayeeItem, IColumn, PayeeStatusColor, PayeeStatusLabel } from '@core/main/types';
+import { ITestTableParam, defaultPageSize, IPayeeItem, IColumn } from '@core/main/types';
 import { ContentContainer, SearchContainer, SearchCol, TableExtraEffect, useTableExtraEffect, queryPayees, GlobalSiteConfig } from '@core/main';
+
+defineOptions({ name: 'SystemJobs' });
 
 const params = reactive<ITestTableParam>({
   page: 1,
@@ -140,24 +134,21 @@ const allColumns = computed(() => [
     }
     : null,
   {
-    title: '收款方编号',
+    title: '职位编号',
     dataIndex: 'payeeNo',
     minWidth: 250,
   },
   {
-    title: '收款方名称',
+    title: '职位名称',
     dataIndex: 'name',
     minWidth: 250,
   },
   {
-    title: '通道类型',
-    dataIndex: 'channelType',
-    minWidth: 250,
-  },
-  {
-    title: '收款方类型',
+    title: '备注',
     dataIndex: 'payeeType',
-    minWidth: 250,
+    minWidth: 350,
+    ellipsis: true,
+    tooltip: true,
   },
   {
     title: '状态',
@@ -169,13 +160,6 @@ const allColumns = computed(() => [
     title: '创建时间',
     dataIndex: 'createTime',
     minWidth: 250,
-  },
-  {
-    title: '失败原因',
-    minWidth: 250,
-    ellipsis: true,
-    tooltip: true,
-    dataIndex: 'failReason',
   },
   {
     title: '操作',

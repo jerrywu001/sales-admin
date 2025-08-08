@@ -64,16 +64,16 @@ const extraItemCount = ref(0);
 const { width } = useWindowSize();
 
 const onLineCols = computed(() => {
-  if (width.value >= sizeMap.x1 && width.value < sizeMap.x2) {
+  if (width.value < sizeMap.x1) {
+    return 3;
+  }
+
+  if (width.value < sizeMap.xx) {
     return 4;
   }
 
-  if (width.value >= sizeMap.x2 && width.value < sizeMap.xx) {
-    return 5;
-  }
-
   if (width.value >= sizeMap.xx) {
-    return 6;
+    return 5;
   }
 
   return 3;

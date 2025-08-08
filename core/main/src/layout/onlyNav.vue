@@ -145,7 +145,7 @@ const isPb0Routes = computed(() => pb0routes.includes(currentRoute.name as strin
 .main-content {
   @apply text-[14px] overflow-y-auto overflow-x-hidden p-[20px] box-border relative;
 
-  background-color: #fff;
+  background-color: var(--color-fill-2);
 }
 
 .toggle-sidebar {

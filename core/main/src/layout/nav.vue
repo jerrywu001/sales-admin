@@ -6,8 +6,8 @@
       @click="router.push('/')"
     >
       <img
-        class="w-[117px] h-[34px] ml-[9px] mr-[49px]"
-        :src="defaultNavLogo"
+        class="h-[24px] ml-[9px] mr-[49px]"
+        :src="logo"
         alt="menu-log"
       >
     </div>
@@ -72,10 +72,11 @@
 <script setup lang="ts">
 import { getWithTopMenus, indexPath, useMenusStore, useUserStore } from '../..';
 import { onConfirm, SvgIcon } from '@vue3/components';
-import { computed, onBeforeMount, toRaw, watch } from 'vue';
+import { computed, onBeforeMount, toRaw, watch, ref } from 'vue';
 import DefaultHead from '@app/assets/images/default-user.png';
 import { useRoute, useRouter } from 'vue-router';
 import defaultNavLogo from '@core/main/assets/images/default-nav-logo.png';
+import defaultDarkNavLogo from '@core/main/assets/images/default-dark-nav-logo.png';
 import { useFullscreen, useDark, useToggle } from '@vueuse/core';
 
 defineEmits(['toggle-sidebar']);
@@ -96,6 +97,8 @@ const { isFullscreen, toggle: toggleFullScreen } = useFullscreen();
 
 const { logout, state: userState } = useUserStore();
 const { state: menusStore, currRoute, setSideMenus, getActiveTopMenu } = useMenusStore();
+
+const logo = ref(defaultNavLogo); // TODO: 到时候通过接口获取
 
 const routes = computed(() => router.getRoutes());
 const username = computed(() => userState.name || '-');
@@ -140,8 +143,10 @@ watch(
   () => isDark.value,
   (val) => {
     if (val) {
+      logo.value = defaultDarkNavLogo;
       document.body.setAttribute('arco-theme', 'dark');
     } else {
+      logo.value = defaultNavLogo;
       document.body.removeAttribute('arco-theme');
     }
   },

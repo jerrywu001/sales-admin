@@ -1,5 +1,5 @@
 <template>
-  <content-container title="收款方管理">
+  <content-container title="员工管理">
     <template #search-buttons>
       <!-- 搜索条件区域 -->
       <search-container>
@@ -25,8 +25,7 @@
             format="YYYY-MM-DD"
             value-format="YYYY-MM-DD"
             style="width: calc(100% - 4px)"
-            start-placeholder="创建时间(起)"
-            end-placeholder="创建时间(止)"
+            :placeholder="['创建时间(起)', '创建时间(止)']"
             @keydown.enter="doSearch"
           />
         </search-col>
@@ -118,6 +117,8 @@ import { computed, ref, reactive } from 'vue';
 import { getRangeDates, ITimeRanger } from '@core/tools';
 import { ITestTableParam, defaultPageSize, IPayeeItem, IColumn, PayeeStatusColor, PayeeStatusLabel } from '@core/main/types';
 import { ContentContainer, SearchContainer, SearchCol, TableExtraEffect, useTableExtraEffect, queryPayees, GlobalSiteConfig } from '@core/main';
+
+defineOptions({ name: 'SystemUsers' });
 
 const params = reactive<ITestTableParam>({
   page: 1,

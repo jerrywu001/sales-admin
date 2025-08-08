@@ -1,6 +1,6 @@
 # node版本, pnpm版本
 
-- `node: >= v18`
+- `node: >= v22`
 - `pnpm: >= v9`
 
 # install

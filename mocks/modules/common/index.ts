@@ -1,10 +1,12 @@
 import { HttpResponse, delay, http } from 'msw';
 import saasMenus from './saas-menus.json';
+import rentMenus from './rent-menus.json';
 import { getHostbaseUrl } from '@core/api';
 
 const successCode = '0';
 
 const allSaasMenus = JSON.parse(JSON.stringify(saasMenus));
+const allRentMenus = JSON.parse(JSON.stringify(rentMenus));
 
 const baseUrl = getHostbaseUrl();
 
@@ -12,9 +14,10 @@ let menuList = JSON.parse(JSON.stringify(saasMenus));
 
 const handlers = [
   http.get(`${baseUrl}/iam/menu/build`, async ({ request }) => {
+    const isRent = request.url.includes(__RENT_APP_PORT__);
     const authed = request.headers.get('Authorization');
 
-    menuList = allSaasMenus;
+    menuList = isRent ? allRentMenus : allSaasMenus;
 
     await delay(0);
 

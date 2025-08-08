@@ -1,5 +1,35 @@
 [
   {
+    "name": "RentUser",
+    "meta": {
+      "title": "租户管理",
+      "icon": "fluent:grid-24-regular",
+      "cache": false
+    },
+    "children": [
+      {
+        "name": "RentUserList",
+        "layout": "default",
+        "component": "system/jobs",
+        "meta": {
+          "title": "租户列表",
+          "icon": null,
+          "cache": false
+        }
+      },
+      {
+        "name": "RentUserAppList",
+        "layout": "default",
+        "component": "system/jobs",
+        "meta": {
+          "title": "应用管理",
+          "icon": null,
+          "cache": false
+        }
+      }
+    ]
+  },
+  {
     "name": "System",
     "meta": {
       "title": "系统管理",
@@ -8,91 +38,41 @@
     },
     "children": [
       {
-        "name": "OperationLog",
+        "name": "SystemOrgs",
         "layout": "default",
-        "component": "system/operation-log",
+        "component": "system/jobs",
         "meta": {
-          "title": "操作日志",
+          "title": "组织管理",
           "icon": null,
           "cache": false
         }
       },
       {
-        "name": "OperationLog1",
+        "name": "SystemJobs",
         "layout": "default",
-        "component": "system/operation-log",
+        "component": "system/jobs",
         "meta": {
-          "title": "操作日志1",
+          "title": "职位管理",
           "icon": null,
           "cache": false
         }
       },
       {
-        "name": "OperationLog2",
+        "name": "SystemUsers",
         "layout": "default",
-        "component": "system/operation-log",
+        "component": "system/users",
         "meta": {
-          "title": "操作日志2",
+          "title": "员工管理",
           "icon": null,
           "cache": false
         }
       },
       {
-        "name": "OperationLog3",
+        "name": "SystemRoles",
         "layout": "default",
-        "component": "system/operation-log",
+        "component": "system/jobs",
         "meta": {
-          "title": "操作日志3",
-          "icon": null,
-          "cache": false
-        }
-      }
-    ]
-  },
-  {
-    "name": "System2",
-    "meta": {
-      "title": "系统管理2",
-      "icon": "mingcute:settings-1-line",
-      "cache": false
-    },
-    "children": [
-      {
-        "name": "OperationLog2-1",
-        "layout": "default",
-        "component": "system/operation-log",
-        "meta": {
-          "title": "操作日志",
-          "icon": null,
-          "cache": false
-        }
-      },
-      {
-        "name": "OperationLog2-2",
-        "layout": "default",
-        "component": "system/operation-log",
-        "meta": {
-          "title": "操作日志1",
-          "icon": null,
-          "cache": false
-        }
-      },
-      {
-        "name": "OperationLog2-3",
-        "layout": "default",
-        "component": "system/operation-log",
-        "meta": {
-          "title": "操作日志2",
-          "icon": null,
-          "cache": false
-        }
-      },
-      {
-        "name": "OperationLog2-4",
-        "layout": "default",
-        "component": "system/operation-log",
-        "meta": {
-          "title": "操作日志3",
+          "title": "角色管理",
           "icon": null,
           "cache": false
         }
