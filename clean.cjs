@@ -6,6 +6,9 @@ shell.rm('-rf', 'pnpm-lock.yaml');
 shell.cd('tailwindconfig');
 shell.rm('-rf', 'node_modules');
 
+shell.cd('../auth');
+shell.rm('-rf', 'node_modules');
+
 shell.cd('../mocks');
 shell.rm('-rf', 'node_modules')
 
@@ -32,6 +35,10 @@ shell.rm('-rf', 'dist');
 shell.rm('-rf', 'node_modules');
 
 shell.cd('../../apps/main');
+shell.rm('-rf', 'dist');
+shell.rm('-rf', 'node_modules');
+
+shell.cd('../../apps/rent');
 shell.rm('-rf', 'dist');
 shell.rm('-rf', 'node_modules');
 

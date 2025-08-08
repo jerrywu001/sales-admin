@@ -1,7 +1,6 @@
 import App from './App.vue';
 import ArcoVue from '@arco-design/web-vue';
-import { AxiosRequest } from '@core/api';
-import { logEnvInfo } from '@core/tools';
+import { AxiosRequest, logEnvInfo } from '@core/api';
 import { directive, userAndMenusPlugin } from '@core/main';
 import router, { createRoutesFromMenu } from './router';
 import { createPinia } from 'pinia';

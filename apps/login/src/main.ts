@@ -1,7 +1,6 @@
 import App from './App.vue';
 import ArcoVue from '@arco-design/web-vue';
-import { AxiosRequest } from '@core/api';
-import { logEnvInfo } from '@core/tools';
+import { AxiosRequest, logEnvInfo } from '@core/api';
 import router from './router';
 import { createApp } from 'vue';
 

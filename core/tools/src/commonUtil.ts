@@ -86,34 +86,6 @@ export function getNumberStrFromChars(str = '', canStartsWithZero = false) {
   return result;
 }
 
-export function getHostbaseUrl(): string {
-  if (__ENABLE_DEV_MOCK__ || __MOCK_PROD__) {
-    return `${location.protocol}//${location.hostname}:${location.port || 80}/mock`;
-  }
-
-  if (!__ENV_DEV__) {
-    return `${location.protocol}//${__PROD__HOST_API__}`;
-  }
-
-  return `${location.protocol}//${location.hostname}:${location.port}`;
-}
-
-export function logEnvInfo() {
-  const red = (str) => {
-    console.log(`%c${str}`, 'color: red');
-  };
-
-  const blue = (str) => {
-    console.log(`%c${str}`, 'color: blue');
-  };
-
-  blue(`本地开发环境？ ${__ENV_DEV__ ? '是' : '否'}，版本：${__VERSION__}，最后构建时间：${__BUILDDATE__}`);
-
-  red(`接口HOST：${getHostbaseUrl()}`);
-
-  if (__ENABLE_DEV_MOCK__ || __MOCK_PROD__) red('当前环境已开启mock服务');
-}
-
 export function copyToClipboard(text: string) {
   const textarea = document.createElement('textarea');
 
@@ -837,28 +809,6 @@ export function generateRandomString(length = 50) {
   }
 
   return result;
-}
-
-export function getH5BaseUrl() {
-  switch (getHostbaseUrl()) {
-    /** 测试 */
-    case 'https://getway.upfreework.com':
-      return 'https://acc-h5.upfreework.com';
-    /** UAT */
-    case 'https://gateway-uat.upfreework.com':
-      return 'https://acc-uat-h5.upfreework.com';
-    /** 101 */
-    case 'http://218.94.156.194:5001':
-      return 'http://192.168.2.101:5002';
-    case 'http://192.168.2.101:5001':
-      return 'http://192.168.2.101:5002';
-    /** 生产 */
-    case 'https://getway.ninghuoban.com':
-      return 'https://h5.ninghuoban.com';
-    /** 其他*/
-    default:
-      return 'https://acc-h5.upfreework.com';
-  }
 }
 
 /**

@@ -21,6 +21,9 @@ cd ..
 
 cd assets
 rm -rf node_modules
+cd ../auth
+rm -rf node_modules
+
 cd ..
 
 # 删除 core/api 目录下的 node_modules
@@ -46,6 +49,10 @@ rm -rf dist
 rm -rf node_modules
 
 cd ../main
+rm -rf dist
+rm -rf node_modules
+
+cd ../rent
 rm -rf dist
 rm -rf node_modules
 

@@ -1,6 +1,6 @@
-import { getHostbaseUrl } from '@core/tools';
 import { HttpResponse, delay, http } from 'msw';
 import records from './res.json';
+import { getHostbaseUrl } from '@core/api';
 
 const successCode = '0';
 

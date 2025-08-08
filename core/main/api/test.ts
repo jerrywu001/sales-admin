@@ -1,6 +1,5 @@
-import { getHostbaseUrl } from '@core/tools';
 import { ITestTableParam, IPayeeItem } from '../types';
-import { EAxiosResponseCode, getHttpErrorMessage, Http } from '@core/api';
+import { EAxiosResponseCode, getHostbaseUrl, getHttpErrorMessage, Http } from '@core/api';
 
 const hostUrl = getHostbaseUrl();
 

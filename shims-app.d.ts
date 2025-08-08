@@ -26,9 +26,9 @@ declare global {
   }
 
   /**
-   * 正式环境的api host
+   * API环境
    */
-  declare const __PROD__HOST_API__: boolean;
+  declare const __API_ENV__: 'small' | 'test' | 'uat' | 'prod';
 
   /**
    * package.json -> builddate

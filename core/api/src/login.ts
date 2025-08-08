@@ -1,7 +1,6 @@
-import { ESmsType } from '..';
+import { ESmsType, getHostbaseUrl } from '..';
 import { Http } from '../axios-request/Axios';
 import { EAxiosResponseCode, getHttpErrorMessage } from '../axios-request/IAxiosRequest';
-import { getHostbaseUrl } from '@core/tools';
 
 const hostUrl = getHostbaseUrl();
 
@@ -45,7 +44,7 @@ export async function doLogout() {
 }
 
 /**
- * 获取access_token
+ * 获取access_token TODO
  */
 export async function queryAccessToken(appcode: string) {
   let token = '';

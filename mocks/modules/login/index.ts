@@ -1,6 +1,6 @@
-import { getHostbaseUrl } from '@core/tools';
 import { HttpResponse, delay, http } from 'msw';
 import loginInfo from './loginInfo.json';
+import { getHostbaseUrl } from '@core/api';
 
 const successCode = '0';
 

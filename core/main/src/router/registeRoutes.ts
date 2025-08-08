@@ -1,31 +1,12 @@
-import { getSecureState, getToken, ISidebarMenu, ITopMenu, IUserInfo, queryAccessToken, queryLoginInfo, querySidebarMenus, removeSecureState, setToken, toOauthAPI } from '@core/api';
-import { RouteLocationNormalizedLoadedGeneric, Router, RouteRecordRaw } from 'vue-router';
+import { getSecureState, getToken, ISidebarMenu, ITopMenu, IUserInfo, queryAccessToken, queryLoginInfo, querySidebarMenus, setToken, toOauthAPI } from '@core/api';
+import { Router, RouteRecordRaw } from 'vue-router';
 import NProgress from 'nprogress';
 import { Message } from '@arco-design/web-vue';
 import { addIsThirdProperty, defaultTab, indexPath, updateNullLayoutToDefault } from '../..';
 import { parseQueryString } from '@core/tools';
-import { nextTick, reactive } from 'vue';
+import { reactive } from 'vue';
 
 export const authGlobalState = reactive({ clearAuthSignal: 0 });
-
-export const cleanAuthQuery = (signal: number, router: Router, route: RouteLocationNormalizedLoadedGeneric) => {
-  console.log('clearAuthSignal', signal);
-
-  if (!signal) return;
-
-  removeSecureState();
-
-  nextTick(() => {
-    router.replace({
-      path: route.path,
-      query: {
-        ...route.query,
-        code: undefined,
-        state: undefined,
-      },
-    });
-  });
-};
 
 export const setupRouter = async (router: Router, createRoutesFromMenu: (menu: ISidebarMenu[]) => RouteRecordRaw[]): Promise<IRouteMenuData> => {
   NProgress.start();
@@ -84,7 +65,7 @@ export const setupRouter = async (router: Router, createRoutesFromMenu: (menu: I
   const savedToken = await getToken();
 
   if (!savedToken) {
-    toOauthAPI();
+    await toOauthAPI();
 
     return emptyResult;
   }

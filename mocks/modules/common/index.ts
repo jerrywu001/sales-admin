@@ -1,6 +1,6 @@
-import { getHostbaseUrl } from '@core/tools';
 import { HttpResponse, delay, http } from 'msw';
 import saasMenus from './saas-menus.json';
+import { getHostbaseUrl } from '@core/api';
 
 const successCode = '0';
 
@@ -114,6 +114,15 @@ const handlers = [
       code: successCode,
       message: null,
       context: { token: 'LzMM9DKl74I9kkqj2iqoM006teHXk3KwOE1X0wNjHQ1dzEIrsx' },
+    });
+  }),
+  http.get(`${baseUrl}/iam/get-client-id`, async () => {
+    await delay(500);
+
+    return HttpResponse.json({
+      code: successCode,
+      message: null,
+      context: 'c134523462346234',
     });
   }),
   http.delete(`${baseUrl}/iam/login/logout`, async () => {

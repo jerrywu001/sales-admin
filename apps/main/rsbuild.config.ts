@@ -58,7 +58,7 @@ export default defineConfig({
       __ENABLE_DEV_MOCK__: JSON.stringify(process.env.ENABLE_MOCK === 'true'),
       __MOCK_PROD__: JSON.stringify(process.env.MOCK_PROD === 'true'), // 是否生产环境启用mock
       __ENV_DEV__: JSON.stringify(!isProd),
-      __PROD__HOST_API__: JSON.stringify(process.env.API_HOST),
+      __API_ENV__: JSON.stringify(process.env.API_ENV),
       __BUILD_BY_VITE__: JSON.stringify(false),
     },
   },

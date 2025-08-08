@@ -32,6 +32,8 @@ export default defineConfig(({ command, mode }) => {
   const proxyProtocol = env.HTTPS === 'true' ? 'https:' : 'http:';
   const proxyPath = `${proxyProtocol}//${proxyHost}`;
 
+  console.log('proxyPath', proxyPath);
+
   const proxyMap = paths.reduce((acc, v) => ({
     ...acc,
     [v]: proxyPath,
@@ -59,7 +61,7 @@ export default defineConfig(({ command, mode }) => {
       __MAIN_APP_PORT__: JSON.stringify(env.MAIN_APP_PORT),
       __RENT_APP_PORT__: JSON.stringify(env.RENT_APP_PORT),
       __ENV_DEV__: JSON.stringify(!isBuild),
-      __PROD__HOST_API__: JSON.stringify(env.API_HOST),
+      __API_ENV__: JSON.stringify(process.env.API_ENV),
       __ENABLE_DEV_MOCK__: JSON.stringify(env.ENABLE_MOCK === 'true'),
       __MOCK_PROD__: JSON.stringify(env.MOCK_PROD === 'true'),
       __VERSION__: JSON.stringify(version),
@@ -67,7 +69,6 @@ export default defineConfig(({ command, mode }) => {
       __BUILD_BY_VITE__: JSON.stringify(true),
     },
     server: {
-      open: true,
       port: Number(env.LOGIN_APP_PORT) || undefined,
       host: env.VITE_HOST,
       https: env.HTTPS === 'true'

@@ -1,5 +1,6 @@
 import { generateRandomString, getCosFileName } from '@core/tools';
 import { Http } from './axios-request/Axios';
+import { Message } from '@arco-design/web-vue';
 import { EAxiosResponseCode, getHttpErrorMessage } from './axios-request/IAxiosRequest';
 import { removeToken, setSecureState } from './src/auth';
 export * from './src/auth';
@@ -93,23 +94,103 @@ export async function downloadLinkFile(fileUrl: string) {
   }
 }
 
-export function toOauthAPI() {
+/**
+ * get clientId by host TODO
+ */
+export async function queryClientIdByHost() {
+  let clientId = '';
+  let errMsg = '';
+
+  const { host } = location;
+  const hostUrl = getHostbaseUrl();
+
+  try {
+    const { code, context, message } = await Http.get<string>(
+      `${hostUrl}/iam/get-client-id`, { host },
+    );
+
+    if (code === EAxiosResponseCode.Succeed) {
+      clientId = context || '';
+    } else if (message) {
+      errMsg = message;
+    }
+  } catch (error) {
+    errMsg = getHttpErrorMessage(error);
+  }
+
+  return {
+    clientId,
+    errMsg,
+  };
+}
+
+export async function toOauthAPI() {
   const { href } = location;
   const [path, search] = href.split('?');
   const uuid = generateRandomString();
 
-  // TODO: 通过域名获取client_id
-  const client_id = 'TODO';
+  const { clientId, errMsg } = await queryClientIdByHost();
+
+  if (errMsg) return Message.error(errMsg);
+
   const redirectUrl = encodeURIComponent(path + (search ? `?${search}` : ''));
-  const oauth2Path = `oauth2/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirectUrl}&state=${uuid}`;
+  const oauth2Path = `oauth2/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUrl}&state=${uuid}`;
 
   removeToken();
   setSecureState(uuid);
 
-  if (__ENABLE_DEV_MOCK__) {
-    window.location.href = `http://localhost:3009/${oauth2Path}`;
-  } else {
-    window.location.href = `http://localhost:3009/${oauth2Path}`; // TODO 字典取值
+  window.location.href = `${getOuathHost()}/${oauth2Path}`;
+}
+
+export const APIHostMap = {
+  small: 'http://192.168.2.101:5001',
+  test: 'https://getway.upfreework.com',
+  uat: 'https://gateway-uat.upfreework.com',
+  prod: 'https://getway.ninghuoban.com',
+};
+
+export const getAPIHost = () => {
+  // TODO: 部署后接口host是否和网站域名一致，待定！
+  // return `${location.protocol}//${location.host}`;
+  return APIHostMap[__API_ENV__ as keyof typeof APIHostMap];
+};
+
+export function getHostbaseUrl(): string {
+  if (__ENABLE_DEV_MOCK__ || __MOCK_PROD__) {
+    return `${location.protocol}//${location.hostname}:${location.port || 80}/mock`;
+  }
+
+  // 打包后的服务器环境
+  if (!__ENV_DEV__) {
+    return APIHostMap[__API_ENV__ as keyof typeof APIHostMap];
+  }
+
+  // 本地run dev开发（走vite proxy配置）
+  return `${location.protocol}//${location.hostname}:${location.port}`;
+}
+
+export const oauthMockHost = 'http://localhost:3009';
+
+export function getOuathHost() {
+  const hostEnv = __API_ENV__;
+
+  if (__ENABLE_DEV_MOCK__ || __MOCK_PROD__) {
+    return oauthMockHost;
+  }
+
+  // TODO: oauth2域名待定
+  switch (hostEnv) {
+    case 'small':
+      return 'http://192.168.2.101:5001';
+    case 'test':
+      return 'https://oauth2.upfreework.com';
+    case 'uat':
+      return 'https://oauth2-uat.upfreework.com';
+    case 'prod':
+      return 'https://oauth2.ninghuoban.com';
+
+    default:
+      break;
   }
 }
 
@@ -150,4 +231,42 @@ export enum ESmsType {
   UnBindCompany = 16,
   /** 内部转账 */
   InternalTransfer = 18,
+}
+
+export function logEnvInfo() {
+  const red = (str) => {
+    console.log(`%c${str}`, 'color: red');
+  };
+
+  const blue = (str) => {
+    console.log(`%c${str}`, 'color: blue');
+  };
+
+  blue(`本地开发环境？ ${__ENV_DEV__ ? '是' : '否'}，版本：${__VERSION__}，最后构建时间：${__BUILDDATE__}`);
+
+  red(`接口HOST：${getHostbaseUrl()}`);
+
+  if (__ENABLE_DEV_MOCK__ || __MOCK_PROD__) red('当前环境已开启mock服务');
+}
+
+export function getH5BaseUrl() {
+  switch (getHostbaseUrl()) {
+    /** 测试 */
+    case 'https://getway.upfreework.com':
+      return 'https://acc-h5.upfreework.com';
+    /** UAT */
+    case 'https://gateway-uat.upfreework.com':
+      return 'https://acc-uat-h5.upfreework.com';
+    /** 101 */
+    case 'http://218.94.156.194:5001':
+      return 'http://192.168.2.101:5002';
+    case 'http://192.168.2.101:5001':
+      return 'http://192.168.2.101:5002';
+    /** 生产 */
+    case 'https://getway.ninghuoban.com':
+      return 'https://h5.ninghuoban.com';
+    /** 其他*/
+    default:
+      return 'https://acc-h5.upfreework.com';
+  }
 }

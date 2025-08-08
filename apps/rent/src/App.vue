@@ -3,9 +3,10 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue';
+import { nextTick, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { CommonApp, authGlobalState, cleanAuthQuery } from '@core/main';
+import { CommonApp, authGlobalState } from '@core/main';
+import { removeSecureState } from '@core/api';
 
 const route = useRoute();
 const router = useRouter();
@@ -13,7 +14,22 @@ const router = useRouter();
 watch(
   () => authGlobalState.clearAuthSignal,
   (signal) => {
-    cleanAuthQuery(signal, router, route);
+    if (!signal) return;
+
+    removeSecureState();
+
+    nextTick(() => {
+      setTimeout(() => {
+        router.replace({
+          path: route.path,
+          query: {
+            ...route.query,
+            code: undefined,
+            state: undefined,
+          },
+        });
+      }, 500);
+    });
   },
   { immediate: true },
 );

@@ -1,7 +1,6 @@
-import { ISidebarMenu } from '../index';
+import { getHostbaseUrl, ISidebarMenu } from '../index';
 import { Http } from '../axios-request/Axios';
 import { EAxiosResponseCode, getHttpErrorMessage } from '../axios-request/IAxiosRequest';
-import { getHostbaseUrl } from '@core/tools';
 
 const hostUrl = getHostbaseUrl();
 

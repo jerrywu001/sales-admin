@@ -1,4 +1,4 @@
-import { getHostbaseUrl } from '@core/tools';
+import { getHostbaseUrl } from '@core/api';
 
 export const UploadImageUrls = {
   license: getHostbaseUrl() + '/base/upload/business/license/pic',

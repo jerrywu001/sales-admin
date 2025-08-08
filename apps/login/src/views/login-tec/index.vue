@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container" :style="{ backgroundImage: `url(${bgImage})` }">
+  <beams>
     <div class="login-box">
       <div class="login-title">
         <div>
@@ -100,7 +100,7 @@
           @click="checkedService = !checkedService"
         >
           <a-checkbox
-            class="mr-2 relative top-[2px]"
+            class="mr-2"
             :model-value="checkedService"
           />
           <label class="cursor-pointer">已同意</label>
@@ -115,18 +115,18 @@
         </span>
       </div>
     </div>
-  </div>
+  </beams>
 </template>
 
 <script setup lang="ts">
-import DefaultLogo from '@/assets/imgs/login-logo.png';
-import DefaultBg from '@/assets/imgs/login-bg.jpg';
+import Logo from '@/assets/imgs/logo.png';
+import Beams from '@/layout/Beams.vue';
 import { GlobalTitle } from '@core/main';
 import { Message } from '@arco-design/web-vue';
 import { SmsButton, SvgIcon, onConfirm } from '@vue3/components';
 import { useTitle } from '@vueuse/core';
 import { ESmsType, type IUserParam, loginToServer, sendNotLoginSmscode } from '@core/api';
-import { computed, h, reactive, ref } from 'vue';
+import { computed, h, onMounted, reactive, ref } from 'vue';
 import { checkPass, checkPhone, checkSmsCode, parseQueryString } from '@core/tools';
 
 useTitle(`登录-${GlobalTitle}`);
@@ -151,8 +151,7 @@ const logining = ref(false);
 const isSMSMode = ref(true);
 const checkedService = ref(false);
 
-const loginLogo = ref(DefaultLogo);
-const bgImage = ref(DefaultBg);
+const loginLogo = ref(Logo);
 const smsBtnRef = ref<InstanceType<typeof SmsButton>>(null);
 
 const enableSmsLogin = computed(() => formState.loginMethod === 0);
@@ -196,13 +195,13 @@ function doLogin() {
       title: '协议',
       message: h(
         'div',
-        { class: 'text-[14px] text-[#1D2129]' },
+        { class: 'text-[14px] text-[#fff]' },
         [
           h('span', '同意'),
           h(
             'a',
             {
-              class: 'text-[#1D2129] hover:underline',
+              class: 'text-[#E4C8A1] hover:underline',
               href: '#',
               target: '_blank',
               onClick: (e) => openService('agreement', e),
@@ -213,7 +212,7 @@ function doLogin() {
           h(
             'a',
             {
-              class: 'text-[#1D2129] hover:underline',
+              class: 'text-[#E4C8A1] hover:underline',
               href: '#',
               target: '_blank',
               onClick: (e) => openService('secretPolicy', e),
@@ -340,6 +339,11 @@ function getQueryData() {
 }
 
 fetchBrandInfo();
+
+onMounted(() => {
+  document.documentElement.classList.add('dark');
+  document.body.setAttribute('arco-theme', 'dark');
+});
 </script>
 
 <style lang="scss">
@@ -349,21 +353,22 @@ fetchBrandInfo();
 
 .login-service {
   .arco-checkbox-icon {
+    border: none !important;
     background-color: #fff;
   }
 
   .arco-checkbox-checked .arco-checkbox-icon {
-    background-color: #1D2129;
+    background-color: #E4C8A1;
   }
 }
 
 .message-box-footer {
   .arco-btn-primary {
-    background-color: #1D2129 !important;
-    color: #fff !important;
+    background-color: #E4C8A1 !important;
+    color: #000 !important;
 
-    &:active {
-      opacity: .87;
+    &:hover {
+      opacity: .7;
     }
   }
 }

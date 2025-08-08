@@ -45,7 +45,7 @@ export const useUserStore = defineStore('user-store', () => {
     }
   }
 
-  function afterLogout() { // TODO
+  function afterLogout() {
     updateToken('');
     updatePermissions([]);
     removeToken();
